@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 
@@ -20,7 +21,10 @@ class User(models.Model):
 
 class Coffee(models.Model):
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="coffees", null=True
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="coffees",
+        null=True,
     )
     name = models.CharField(max_length=50, default="")
     roast = models.CharField(max_length=50, default="")
