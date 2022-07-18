@@ -1,6 +1,7 @@
+from queue import PriorityQueue
 from rest_framework import generics
-from .serializers import UserSerializer, CoffeeSerializer
-from .models import User, Coffee
+from .serializers import ProfileSerializer, CoffeeSerializer
+from .models import Profile, Coffee
 from rest_framework.permissions import BasePermission, IsAuthenticated
 
 
@@ -14,14 +15,14 @@ class WritePermission(BasePermission):
         return obj.author == request.user
 
 
-class UserList(generics.ListCreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class ProfileList(generics.ListCreateAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
 
 
-class UserDetail(generics.RetrieveUpdateDestroyAPIView, WritePermission):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class ProfileDetail(generics.RetrieveUpdateDestroyAPIView, WritePermission):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
 
 
 class CoffeeList(generics.ListCreateAPIView):

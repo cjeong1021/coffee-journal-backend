@@ -1,14 +1,14 @@
 from rest_framework import serializers
-from .models import User, Coffee
+from .models import Profile, Coffee
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     coffees = serializers.HyperlinkedRelatedField(
         view_name="coffee_detail", many=True, read_only=True
     )
 
     class Meta:
-        model = User
+        model = Profile
         fields = ("id", "name", "fav_roast", "brew_method", "coffees")
 
 

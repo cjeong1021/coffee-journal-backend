@@ -10,7 +10,7 @@ ROAST_CHOICES = (
 )
 
 
-class User(models.Model):
+class Profile(models.Model):
     name = models.CharField(max_length=50, default="")
     fav_roast = models.CharField(max_length=6, choices=ROAST_CHOICES, default="Medium")
     brew_method = models.CharField(max_length=50, default="")
