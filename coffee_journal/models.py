@@ -11,6 +11,13 @@ ROAST_CHOICES = (
 
 
 class Profile(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="profile",
+        null=True,
+    )
+
     name = models.CharField(max_length=50, default="")
     fav_roast = models.CharField(max_length=6, choices=ROAST_CHOICES, default="Medium")
     brew_method = models.CharField(max_length=50, default="")
