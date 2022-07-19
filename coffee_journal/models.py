@@ -38,6 +38,7 @@ class Coffee(models.Model):
     origin = models.CharField(max_length=50, default="")
     notes = models.TextField()
     brew_method = models.CharField(max_length=50, default="")
+    image = models.TextField()
 
     def __str__(self):
         return self.name

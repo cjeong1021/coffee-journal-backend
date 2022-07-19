@@ -23,21 +23,19 @@ class WritePermission(BasePermission):
 
 
 class ProfileList(generics.ListCreateAPIView, WritePermission):
-    permission_classes = [WritePermission]
+    permission_classes = [IsAuthenticated]
     serializer_class = ProfileSerializer
 
     def get_queryset(self):
         user = self.request.user.id
         return Profile.objects.filter(user=user)
 
-
-class ProfileDetail(generics.RetrieveUpdateDestroyAPIView, WritePermission):
-    permission_classes = [WritePermission]
-    serializer_class = ProfileSerializer
-
-    def get_queryset(self):
-        user = self.request.user.id
-        return Profile.objects.filter(user=user)
+    def create(self, request, **kwargs):
+        serializer = ProfileSerializer(data=self.request.data)
+        if serializer.is_valid():
+            serializer.save(user=self.request.user)
+            return JsonResponse(request.data)
+        return JsonResponse(request.data)
 
 
 class CoffeeList(generics.ListCreateAPIView, WritePermission):
@@ -52,8 +50,16 @@ class CoffeeList(generics.ListCreateAPIView, WritePermission):
         serializer = CoffeeSerializer(data=self.request.data)
         if serializer.is_valid():
             serializer.save(user=self.request.user)
-            return HttpResponse(request.user)
-        return HttpResponse(request.data)
+            return JsonResponse(request.data)
+
+
+class ProfileDetail(generics.RetrieveUpdateDestroyAPIView, WritePermission):
+    permission_classes = [WritePermission]
+    serializer_class = ProfileSerializer
+
+    def get_queryset(self):
+        user = self.request.user.id
+        return Profile.objects.filter(user=user)
 
 
 class CoffeeDetail(generics.RetrieveUpdateDestroyAPIView, WritePermission):

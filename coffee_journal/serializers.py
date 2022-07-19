@@ -11,4 +11,13 @@ class ProfileSerializer(serializers.ModelSerializer):
 class CoffeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Coffee
-        fields = ("user", "id", "name", "roast", "origin", "notes", "brew_method")
+        fields = (
+            "user",
+            "id",
+            "name",
+            "roast",
+            "origin",
+            "notes",
+            "brew_method",
+            "image",
+        )
