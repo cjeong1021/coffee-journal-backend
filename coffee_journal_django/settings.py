@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import os
+import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,13 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-o040e^lh+=4b1afywb3j_kki5eia$z#7ig$&&b*kv5%kh^a1$e"
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True if os.environ["MODE"] == "dev" else False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -50,7 +51,9 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -82,15 +85,7 @@ WSGI_APPLICATION = "coffee_journal_django.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "coffee_journal",
-        "USER": "coffee",
-        "PASSWORD": "coffee",
-        "HOST": "localhost",
-    }
-}
+DATABASES = {"default": dj_database_url.config(conn_max_age=600)}
 
 
 # Password validation
@@ -162,3 +157,6 @@ SIMPLE_JWT = {
 
 CORS_ALLOW_ALL_ORIGINS = True
 AUTH_USER_MODEL = "users.NewUser"
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+DATABASE_URL = "postgres://coffee:coffee_journal@localhost:5432/api"
