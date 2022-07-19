@@ -53,6 +53,18 @@ class CoffeeList(generics.ListCreateAPIView, WritePermission):
             return JsonResponse(request.data)
 
 
+class CoffeeListPreview(generics.ListAPIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = CoffeeSerializer
+    queryset = Coffee.objects.all()
+
+
+class ProfileListPreview(generics.ListAPIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = ProfileSerializer
+    queryset = Profile.objects.all()
+
+
 class ProfileDetail(generics.RetrieveUpdateDestroyAPIView, WritePermission):
     permission_classes = [WritePermission]
     serializer_class = ProfileSerializer
