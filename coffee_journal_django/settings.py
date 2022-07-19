@@ -159,4 +159,4 @@ CORS_ALLOW_ALL_ORIGINS = True
 AUTH_USER_MODEL = "users.NewUser"
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
-DATABASE_URL = "postgres://coffee:coffee_journal@localhost:5432/api"
+DATABASE_URL = "postgres://coffee:coffee@localhost:5432/coffee_journal"
