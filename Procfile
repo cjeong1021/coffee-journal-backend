@@ -1,1 +1,1 @@
-web: gunicorn coffee_journal_backend.wsgi
+web: gunicorn coffee_journal_django.wsgi
