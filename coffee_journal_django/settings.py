@@ -156,7 +156,7 @@ SIMPLE_JWT = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
-CSRF_TRUSTED_ORIGINS = ["https://web-production-220b.up.railway.app/"]
+CSRF_TRUSTED_ORIGINS = "https://web-production-220b.up.railway.app"
 AUTH_USER_MODEL = "users.NewUser"
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
