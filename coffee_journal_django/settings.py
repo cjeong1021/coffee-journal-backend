@@ -24,10 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ["SECRET_KEY"]
+SECRET_KEY = "django-insecure-o040e^lh+=4b1afywb3j_kki5eia$z#7ig$&&b*kv5%kh^a1$e"
+# os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True if os.environ["MODE"] == "dev" else False
+DEBUG = True
+# if os.environ["MODE"] == "dev" else False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -85,7 +87,16 @@ WSGI_APPLICATION = "coffee_journal_django.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {"default": dj_database_url.config(conn_max_age=600)}
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "railway",
+        "USER": "postgres",
+        "PASSWORD": "wXsTUbboQSFcN6ksFajq",
+        "HOST": "containers-us-west-192.railway.app",
+        "PORT": "6690",
+    }
+}
 
 
 # Password validation
