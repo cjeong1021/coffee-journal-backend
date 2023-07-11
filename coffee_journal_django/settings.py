@@ -92,7 +92,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "railway",
         "USER": "postgres",
-        "PASSWORD": "qAsmPQZhyQeJiDrr100v",
+        "PASSWORD": "0V4Y0QcMe28NZFb8s2uM",
         "HOST": "containers-us-west-192.railway.app",
         "PORT": "6690",
     }
@@ -167,7 +167,7 @@ SIMPLE_JWT = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
-CSRF_TRUSTED_ORIGINS = ['https://web-production-220b.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ["https://web-production-220b.up.railway.app"]
 AUTH_USER_MODEL = "users.NewUser"
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
